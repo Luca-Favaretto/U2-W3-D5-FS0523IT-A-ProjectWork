@@ -36,7 +36,7 @@
     </nav>
 
     <h1 class="text-center">Back-office</h1>
-    <form action="submit">
+    <form>
       <div class="row mt-3 justify-content-center">
         <div class="col-8">
           <div class="row mt-3">
@@ -55,35 +55,43 @@
         <div class="col-8">
           <div class="row mt-3">
             <label class="col-3" for="url">Url of telephone:</label>
-            <input class="col-9" type="text" id="url" rerequired />
+            <input class="col-9" type="text" id="url" required />
           </div>
         </div>
         <div class="col-8">
           <div class="row mt-3">
             <label class="col-3" for="price">Price of telephone:</label>
-            <input class="col-9" type="number" min="0" id="price" rerequired />
+            <input class="col-9" type="number" min="0" id="price" required />
           </div>
         </div>
         <div class="col-8">
           <div class="row mt-3">
             <label class="col-3" for="brand">Brand of telephone:</label>
-            <input class="col-9" type="text" id="brand" rerequired />
+            <input class="col-9" type="text" id="brand" required />
           </div>
         </div>
         <div class="col-8 mt-3">
           <div class="row justify-content-around">
             <button
               id="newProductBtn"
-              type="submit"
+              type="button"
               class="btn btn-primary col-3"
             >
               New products
             </button>
-            <button id="modBtn" type="submit" class="btn btn-warning col-3">
-              New products
+            <button
+              id="modBtn"
+              type="button"
+              class="btn btn-warning col-3 d-none"
+            >
+              Change
             </button>
-            <button type="submit" class="btn btn-danger col-3">
-              New products
+            <button
+              id="deleteBtn"
+              type="button"
+              class="btn btn-danger col-3 d-none"
+            >
+              Dalete
             </button>
           </div>
         </div>

@@ -1,8 +1,9 @@
 window.onload = () => {
   getFetch();
 };
+let url = "https://striveschool-api.herokuapp.com/api/product/";
 const getFetch = function () {
-  fetch("https://striveschool-api.herokuapp.com/api/product/", {
+  fetch(url, {
     method: "GET",
     headers: {
       Authorization:
@@ -56,15 +57,24 @@ const getFetch = function () {
         viewBtn.onclick = () => {
           window.location.href = "./productDetail.html?id=" + _id;
         };
+        const modBtn = document.createElement("button");
+        modBtn.classList = "btn btn-sm btn-outline-secondary";
+        modBtn.innerText = "Modifica";
+        modBtn.onclick = () => {
+          window.location.href = "./backoffice.html?id=" + _id;
+        };
 
         const deleteBtn = document.createElement("button");
         deleteBtn.classList = "btn btn-sm btn-outline-secondary";
         deleteBtn.innerText = "Delete";
+
         deleteBtn.onclick = () => {
           col.remove();
+          deleteFetch(url, _id);
         };
 
         divInsideBody.appendChild(viewBtn);
+        divInsideBody.appendChild(modBtn);
         divInsideBody.appendChild(deleteBtn);
         divBody.appendChild(divInsideBody);
         cardBody.appendChild(divBody);
@@ -72,6 +82,42 @@ const getFetch = function () {
         col.appendChild(card);
         cardContainer.appendChild(col);
       });
+    })
+    .catch(error => console.log(error));
+};
+
+const deleteFetch = function (url, _id, event) {
+  console.log("PUT fetch");
+  fetch(url + _id, {
+    method: "DELETE",
+    headers: {
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTRkZWFmYjI1NGU4ODAwMTgzZjE4NzUiLCJpYXQiOjE2OTk2MDUyNDMsImV4cCI6MTcwMDgxNDg0M30.h1hbdEiCDdtbq3pWxdums0TOKskGalhH_Q3DC2dgorI",
+      "Content-Type": "application/json"
+    }
+  })
+    .then(resp => {
+      if (!resp.ok) {
+        if (resp.status === 400) {
+          throw new Error("Bad Request");
+        }
+        if (resp.status === 401) {
+          throw new Error("Unauthorized");
+        }
+        if (resp.status === 403) {
+          throw new Error("Forbidden");
+        }
+        if (resp.status === 404) {
+          throw new Error("Not found");
+        }
+
+        throw new Error("Generic Fetching error");
+      }
+      console.log(resp);
+      return resp.json();
+    })
+    .then(createdObj => {
+      console.log(createdObj);
     })
     .catch(error => console.log(error));
 };
