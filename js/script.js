@@ -15,6 +15,8 @@ window.onload = () => {
   console.log(modBtn);
   const deleteBtn = document.getElementById("deleteBtn");
   console.log(deleteBtn);
+  const resetBtn = document.getElementById("resetBtn");
+  console.log(resetBtn);
 
   const params = new URLSearchParams(window.location.search).get("id");
   console.log(params);
@@ -28,6 +30,15 @@ window.onload = () => {
     newProductBtn.classList.add("d-none");
   }
 
+  resetBtn.addEventListener("click", event => {
+    if (areYouSure()) {
+      document.getElementById("name").value = "";
+      document.getElementById("descripretion").value = "";
+      document.getElementById("url").value = "";
+      document.getElementById("price").value = "";
+      document.getElementById("brand").value = "";
+    }
+  });
   newProductBtn.addEventListener("click", event => {
     postFetch(
       url,
@@ -72,6 +83,7 @@ const areYouSure = function () {
     console.log(
       "L'utente ha premuto Annulla o ha chiuso la finestra di dialogo."
     );
+    return result;
   }
 };
 const fillForm = function (url, params, event) {
