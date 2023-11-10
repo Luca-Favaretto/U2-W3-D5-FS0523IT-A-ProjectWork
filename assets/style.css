@@ -1,0 +1,11 @@
+.card {
+  height: 400px;
+}
+.card img {
+  height: 250px;
+  object-fit: cover;
+}
+
+.container-fluid {
+  gap: 1rem;
+}

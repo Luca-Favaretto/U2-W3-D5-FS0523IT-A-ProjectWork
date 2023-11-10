@@ -35,10 +35,10 @@ window.onload = () => {
 
       main.innerHTML = `
       <div class="row">
-        <div class="col-12"><h1 class="text-center">${name}</h1></div>
+        <div class="col-12 my-3"><h1 class="text-center">${name}</h1></div>
         <div class="col-12 col-lg-7 "><img src="${imageUrl}" alt="img of product" /></div>
         <div class="col-12 col-lg-5">
-          <h3>${description}</h3>
+          <h3 class="my-3">${description}</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam,
             voluptate sapiente velit molestias architecto repellendus, harum

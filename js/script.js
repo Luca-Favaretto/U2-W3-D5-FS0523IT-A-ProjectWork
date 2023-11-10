@@ -24,6 +24,8 @@ window.onload = () => {
     fillForm(url, params);
     modBtn.classList.remove("d-none");
     deleteBtn.classList.remove("d-none");
+  } else {
+    newProductBtn.classList.add("d-none");
   }
 
   newProductBtn.addEventListener("click", event => {
@@ -40,8 +42,10 @@ window.onload = () => {
     );
   });
   modBtn.addEventListener("click", event => {
+    areYouSure();
     putFetch(
       url,
+      params,
       {
         name: name.value,
         description: descripretion.value,
@@ -54,10 +58,22 @@ window.onload = () => {
   });
 
   deleteBtn.addEventListener("click", event => {
+    areYouSure();
     deleteFetch(url, params, event);
   });
 };
 
+const areYouSure = function () {
+  let result = confirm("Are you sure?");
+
+  if (result) {
+    console.log("L'utente ha premuto OK.");
+  } else {
+    console.log(
+      "L'utente ha premuto Annulla o ha chiuso la finestra di dialogo."
+    );
+  }
+};
 const fillForm = function (url, params, event) {
   fetch(url + params, {
     method: "GET",
@@ -101,10 +117,10 @@ const fillForm = function (url, params, event) {
     });
 };
 
-const putFetch = function (url, newProduct, event) {
+const putFetch = function (url, params, newProduct, event) {
   event.preventDefault();
   console.log("PUT fetch");
-  fetch(url, {
+  fetch(url + params, {
     method: "PUT",
     body: JSON.stringify(newProduct),
     headers: {
@@ -135,6 +151,16 @@ const putFetch = function (url, newProduct, event) {
     })
     .then(createdObj => {
       console.log(createdObj);
+      document.getElementById("name").value = "";
+      document.getElementById("descripretion").value = "";
+      document.getElementById("url").value = "";
+      document.getElementById("price").value = "";
+      document.getElementById("brand").value = "";
+      const allertBlue = document.getElementById("allert-yellow");
+      allertBlue.classList.remove("d-none");
+      setTimeout(function () {
+        allertBlue.classList.add("d-none");
+      }, 2000);
     })
     .catch(error => console.log(error));
 };
@@ -181,6 +207,11 @@ const postFetch = function (url, newProduct, event) {
     })
     .then(createdObj => {
       console.log(createdObj);
+      const allertYellow = document.getElementById("allert-blue");
+      allertYellow.classList.remove("d-none");
+      setTimeout(function () {
+        allertYellow.classList.add("d-none");
+      }, 2000);
     })
     .catch(error => console.log(error));
 };
@@ -217,6 +248,16 @@ const deleteFetch = function (url, _id, event) {
     })
     .then(createdObj => {
       console.log(createdObj);
+      document.getElementById("name").value = "";
+      document.getElementById("descripretion").value = "";
+      document.getElementById("url").value = "";
+      document.getElementById("price").value = "";
+      document.getElementById("brand").value = "";
+      const allertRed = document.getElementById("red-allert");
+      allertRed.classList.remove("d-none");
+      setTimeout(function () {
+        allertRed.classList.add("d-none");
+      }, 2000);
     })
     .catch(error => console.log(error));
 };
